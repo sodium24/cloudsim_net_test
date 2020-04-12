@@ -1,0 +1,100 @@
+version: "2.4"
+services:
+  sim:
+    image: ${simImage}
+    command: cloudsim_sim.ign headless:=${headless} circuit:=${circuit} worldName:=${worldName} robotName1:=${robotName1} robotConfig1:=${robotConfig1}
+    networks:
+      test_net1:
+        ipv4_address: 172.28.1.3
+    environment:
+      - DISPLAY
+      - QT_X11_NO_MITSHM=1
+      - XAUTHORITY=/tmp/.docker.xauth
+      - IGN_PARTITION=sim
+      - IGN_IP=172.28.1.3
+    runtime: nvidia
+    security_opt:   
+      - seccomp=unconfined
+    volumes:
+      - "/tmp/.docker.xauth:/tmp/.docker.xauth"
+      - "/tmp/.X11-unix:/tmp/.X11-unix"
+      - "/etc/localtime:/etc/localtime:ro"
+      - "/dev/input:/dev/input" 
+
+  extra_messages1:
+    image: advertisetopics
+    command: advertisetopics 100 100
+    networks:
+      test_net1:
+        ipv4_address: 172.28.1.20
+    environment:
+      - IGN_PARTITION=anothersim
+      - IGN_IP=172.28.1.20
+    depends_on:
+      - "sim"
+
+  extra_messages2:
+    image: advertisetopics
+    command: advertisetopics 100 100
+    networks:
+      test_net1:
+        ipv4_address: 172.28.1.21
+    environment:
+      - IGN_PARTITION=anothersim
+      - IGN_IP=172.28.1.21
+    depends_on:
+      - "sim"
+
+  extra_messages3:
+    image: advertisetopics
+    command: advertisetopics 50 100
+    networks:
+      test_net1:
+        ipv4_address: 172.28.1.22
+    environment:
+      - IGN_PARTITION=anothersim
+      - IGN_IP=172.28.1.22
+    depends_on:
+      - "sim"
+
+  bridge1:
+    image: ${bridgeImage}
+    command: circuit:=${circuit} worldName:=${worldName} robotName1:=${robotName1} robotConfig1:=${robotConfig1}
+    networks:
+      relay_net1:
+        ipv4_address: 172.30.1.1
+      test_net1:
+        ipv4_address: 172.28.1.4
+    environment:
+      - IGN_PARTITION=sim
+      - IGN_IP=172.28.1.4
+      - ROS_MASTER_URI=http://172.30.1.1:11311
+    depends_on:
+      - "sim"
+      - "extra_messages1"
+      - "extra_messages2"
+      - "extra_messages3"
+
+  solution1:
+    image: ${solutionImage}
+    networks:
+      relay_net1:
+        ipv4_address: 172.30.1.2
+    environment:
+      - ROS_MASTER_URI=http://172.30.1.1:11311
+    runtime: nvidia
+    depends_on:
+      - "bridge1"
+
+networks:
+  test_net1:
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.28.1.0/24
+  relay_net1:
+    internal: true
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.30.0.0/16

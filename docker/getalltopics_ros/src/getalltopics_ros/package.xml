@@ -1,0 +1,12 @@
+<package format="2">
+  <name>getalltopics_ros</name>
+  <description>Log all advertised Ignition Transport topics regardless of their partition.</description>
+  <maintainer email="malcolm@sodium24.com">Malcolm Stagg</maintainer>
+
+  <version>0.1.0</version>
+  <license>MIT</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <depend>roscpp</depend>
+
+</package>
