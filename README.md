@@ -13,7 +13,7 @@ each infrastructure container, saturating their ability to send/receive
 messages, and thereby causing a failure.
 
 Results of this testing have been shared with the DARPA SubT Challenge team
-in the hopes that it will help to resolve these irregularities in the future.
+in the hope that it will help to resolve these irregularities in the future.
 
 For more information about the DARPA SubT Challenge, please see
 https://www.subtchallenge.com/.
@@ -62,6 +62,8 @@ https://www.subtchallenge.com/.
 The [test_cases](/test_cases) directory contains several test cases, each of which
 has a [docker-compose.yml](test_cases/delay_10ms/docker-compose.yml) file defining the test setup. A common
 [test_config.env](test_config.env) file in the root directory defines common test parameters.
+
+New test cases can be added simply by creating a new directory in [test_cases](/test_cases) with a `docker-compose.yml` and `README.txt` file.
 
 ## Running Test Cases
 
