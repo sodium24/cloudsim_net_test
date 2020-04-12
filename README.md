@@ -20,25 +20,25 @@ https://www.subtchallenge.com/.
 
 ## Internal Docker Containers
 
-- `netsim`: Build with `build_netsim.sh`. Contains packages for performing
+- [netsim](docker/netsim): Build with [build_netsim.sh](docker/build_netsim.sh). Contains packages for performing
   simulation of network links between other docker containers. Build this
   before running the network tests.
 
-- `advertisetopics`: Build with `build_advertisetopics.sh`. Allows many 
+- [advertisetopics](docker/advertisetopics): Build with [build_advertisetopics.sh](docker/build_advertisetopics.sh). Allows many 
   concurrent Ignition Transport topics to be advertised, in order to cause
   saturation of any listening nodes. Build this before running the 
   Ignition Transport related tests.
 
   Usage: `docker run -it advertisetopics advertisetopics <num_nodes> <topics_per_node>`
 
-- `getalltopics`: Build with `build_getalltopics.sh`. Simple test code
+- [getalltopics](docker/getalltopics): Build with [build_getalltopics.sh](docker/build_getalltopics.sh). Simple test code
   to print all advertised Ignition Transport topics regardless of their
   partition.
 
   Usage: `docker run -it getalltopics getalltopics list`
 
-- `getalltopics_ros`: Build with `build_getalltopics_ros.sh`. Similar
-  to `getalltopics` except using ROS logging infrastructure.
+- [getalltopics_ros](docker/getalltopics_ros): Build with [build_getalltopics_ros.sh](docker/build_getalltopics_ros.sh). Similar
+  to [getalltopics](docker/getalltopics) except using ROS logging infrastructure.
 
   Usage: `docker run -it getalltopics_ros`
 
@@ -59,13 +59,13 @@ https://www.subtchallenge.com/.
 
 ## Test Structure
 
-The `test_cases` directory contains several test cases, each of which
-has a `docker-compose.yml` file defining the test setup. A common
-`test_config.env` file in the root directory defines common test parameters.
+The [test_cases](/test_cases) directory contains several test cases, each of which
+has a [docker-compose.yml](test_cases/delay_10ms/docker-compose.yml) file defining the test setup. A common
+[test_config.env](test_config.env) file in the root directory defines common test parameters.
 
 ## Running Test Cases
 
-First, setup `test_config.env` with the common test setup. For testing
+First, setup [test_config.env](test_config.env) with the common test setup. For testing
 the newest version of the CloudSim containers, you can define:
 
 ```
@@ -95,71 +95,77 @@ machine.
 
 ## Test Case Descriptions
 
-### bw_100m
+### Network Parameters
+
+#### bw_100m
 Test with 100 Mbps bandwidth.
 
-### bw_100m_5ms_0.1pct
+#### bw_100m_5ms_0.1pct
 Test with 100 Mbps bandwidth and 5ms delay, variance 1ms, packet loss 0.1%.
 
-### bw_1g
+#### bw_1g
 Test with 1 Gbps bandwidth.
 
-### bw_1g_5ms_0.1pct
+#### bw_1g_5ms_0.1pct
 Test with 1 Gbps bandwidth and 5ms delay, variance 1ms, packet loss 0.1%.
 
-### delay_100ms
+#### delay_100ms
 Test with 100 ms delay, 10 ms variance.
 
-### delay_10ms
+#### delay_10ms
 Test with 10 ms delay, 1 ms variance.
 
-### delay_10ms_0.1pct
+#### delay_10ms_0.1pct
 Test with 10 ms delay, 1 ms variance, 0.1% packet loss.
 
-### delay_10ms_1pct
+#### delay_10ms_1pct
 Test with 10 ms delay, 1 ms variance, 1% packet loss.
 
-### delay_10ms_5pct
+#### delay_10ms_5pct
 Test with 10 ms delay, 1 ms variance, 5% packet loss.
 
-### delay_10ms_reorder_0.1pct
+#### delay_10ms_reorder_0.1pct
 Test with 10 ms delay, 1 ms variance, 0.1% reordering.
 
-### delay_10ms_reorder_1pct
+#### delay_10ms_reorder_1pct
 Test with 10 ms delay, 1 ms variance, 1% reordering.
 
-### delay_10ms_var_5ms
+#### delay_10ms_var_5ms
 Test with 10 ms delay, 5 ms variance.
 
-### delay_10ms_var_5ms_0.1pct
+#### delay_10ms_var_5ms_0.1pct
 Test with 10 ms delay, 5 ms variance, 0.1% packet loss.
 
-### delay_10ms_var_5ms_1pct
+#### delay_10ms_var_5ms_1pct
 Test with 10 ms delay, 5 ms variance, 1% packet loss.
 
-### delay_10ms_var_5ms_5pct
+#### delay_10ms_var_5ms_5pct
 Test with 10 ms delay, 5 ms variance, 5% packet loss.
 
-### delay_10ms_var_5ms_reorder_0.1pct
+#### delay_10ms_var_5ms_reorder_0.1pct
 Test with 10 ms delay, 5 ms variance, 0.1% reordering.
 
-### delay_10ms_var_5ms_reorder_1pct
+#### delay_10ms_var_5ms_reorder_1pct
 Test with 10 ms delay, 5 ms variance, 1% reordering.
 
-### ign_saturation_1
+### Ignition Transport Saturation
+
+#### ign_saturation_1
 Test with ignition transport message saturation. Two containers have 100 nodes
 advertising 100 topics per node, and one container has 50 nodes advertising
 with 100 topics per node.
 
-### ign_saturation_2
+#### ign_saturation_2
 Test with ignition transport message saturation. Two containers have 100 nodes
 advertising 100 topics per node, and one container has 90 nodes advertising
 with 100 topics per node.
 
-### ign_saturation_3
+#### ign_saturation_3
 Test with ignition transport message saturation. Three containers have 150 nodes
 advertising 100 topics per node.
 
-### simple_routing
+### Test Validation
+
+#### simple_routing
 Simple routing test with the `netsim` docker container.
 
