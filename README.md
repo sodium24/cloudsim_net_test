@@ -166,6 +166,10 @@ with 100 topics per node.
 Test with ignition transport message saturation. Three containers have 150 nodes
 advertising 100 topics per node.
 
+#### ign_saturation_4
+Test with ignition transport message saturation. Ten containers have 50 nodes
+advertising 10 topics per node.
+
 ### Test Validation
 
 #### simple_routing
