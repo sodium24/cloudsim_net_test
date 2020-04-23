@@ -1,0 +1,320 @@
+version: "2.4"
+services:
+  sim:
+    image: ${simImage}
+    command: cloudsim_sim.ign headless:=${headless} circuit:=${circuit} worldName:=${worldName} robotName1:=${robotName1} robotConfig1:=${robotConfig1}
+    networks:
+      test_net1:
+        ipv4_address: 172.28.1.3
+    environment:
+      - DISPLAY
+      - QT_X11_NO_MITSHM=1
+      - XAUTHORITY=/tmp/.docker.xauth
+      - IGN_PARTITION=sim
+      - IGN_IP=172.28.1.3
+    runtime: nvidia
+    security_opt:   
+      - seccomp=unconfined
+    volumes:
+      - "/tmp/.docker.xauth:/tmp/.docker.xauth"
+      - "/tmp/.X11-unix:/tmp/.X11-unix"
+      - "/etc/localtime:/etc/localtime:ro"
+      - "/dev/input:/dev/input" 
+
+  extra_messages1:
+    image: advertisetopics
+    command: advertisetopics 125 1
+    networks:
+      test_net1:
+        ipv4_address: 172.28.1.20
+    environment:
+      - IGN_PARTITION=anothersim
+      - IGN_IP=172.28.1.20
+    depends_on:
+      - "sim"
+
+  extra_messages2:
+    image: advertisetopics
+    command: advertisetopics 125 1
+    networks:
+      test_net1:
+        ipv4_address: 172.28.1.21
+    environment:
+      - IGN_PARTITION=anothersim
+      - IGN_IP=172.28.1.21
+    depends_on:
+      - "sim"
+
+  extra_messages3:
+    image: advertisetopics
+    command: advertisetopics 125 1
+    networks:
+      test_net1:
+        ipv4_address: 172.28.1.22
+    environment:
+      - IGN_PARTITION=anothersim
+      - IGN_IP=172.28.1.22
+    depends_on:
+      - "sim"
+
+  extra_messages4:
+    image: advertisetopics
+    command: advertisetopics 125 1
+    networks:
+      test_net1:
+        ipv4_address: 172.28.1.23
+    environment:
+      - IGN_PARTITION=anothersim
+      - IGN_IP=172.28.1.23
+    depends_on:
+      - "sim"
+
+  extra_messages5:
+    image: advertisetopics
+    command: advertisetopics 125 1
+    networks:
+      test_net1:
+        ipv4_address: 172.28.1.24
+    environment:
+      - IGN_PARTITION=anothersim
+      - IGN_IP=172.28.1.24
+    depends_on:
+      - "sim"
+
+  extra_messages6:
+    image: advertisetopics
+    command: advertisetopics 125 1
+    networks:
+      test_net1:
+        ipv4_address: 172.28.1.25
+    environment:
+      - IGN_PARTITION=anothersim
+      - IGN_IP=172.28.1.25
+    depends_on:
+      - "sim"
+
+  extra_messages7:
+    image: advertisetopics
+    command: advertisetopics 125 1
+    networks:
+      test_net1:
+        ipv4_address: 172.28.1.26
+    environment:
+      - IGN_PARTITION=anothersim
+      - IGN_IP=172.28.1.26
+    depends_on:
+      - "sim"
+
+  extra_messages8:
+    image: advertisetopics
+    command: advertisetopics 125 1
+    networks:
+      test_net1:
+        ipv4_address: 172.28.1.27
+    environment:
+      - IGN_PARTITION=anothersim
+      - IGN_IP=172.28.1.27
+    depends_on:
+      - "sim"
+
+  extra_messages9:
+    image: advertisetopics
+    command: advertisetopics 125 1
+    networks:
+      test_net1:
+        ipv4_address: 172.28.1.28
+    environment:
+      - IGN_PARTITION=anothersim
+      - IGN_IP=172.28.1.28
+    depends_on:
+      - "sim"
+
+  extra_messages10:
+    image: advertisetopics
+    command: advertisetopics 125 1
+    networks:
+      test_net1:
+        ipv4_address: 172.28.1.29
+    environment:
+      - IGN_PARTITION=anothersim
+      - IGN_IP=172.28.1.29
+    depends_on:
+      - "sim"
+  extra_messages11:
+    image: advertisetopics
+    command: advertisetopics 125 1
+    networks:
+      test_net1:
+        ipv4_address: 172.28.1.30
+    environment:
+      - IGN_PARTITION=anothersim
+      - IGN_IP=172.28.1.30
+    depends_on:
+      - "sim"
+
+  extra_messages12:
+    image: advertisetopics
+    command: advertisetopics 125 1
+    networks:
+      test_net1:
+        ipv4_address: 172.28.1.31
+    environment:
+      - IGN_PARTITION=anothersim
+      - IGN_IP=172.28.1.31
+    depends_on:
+      - "sim"
+
+  extra_messages13:
+    image: advertisetopics
+    command: advertisetopics 125 1
+    networks:
+      test_net1:
+        ipv4_address: 172.28.1.32
+    environment:
+      - IGN_PARTITION=anothersim
+      - IGN_IP=172.28.1.32
+    depends_on:
+      - "sim"
+
+  extra_messages14:
+    image: advertisetopics
+    command: advertisetopics 125 1
+    networks:
+      test_net1:
+        ipv4_address: 172.28.1.33
+    environment:
+      - IGN_PARTITION=anothersim
+      - IGN_IP=172.28.1.33
+    depends_on:
+      - "sim"
+
+  extra_messages15:
+    image: advertisetopics
+    command: advertisetopics 125 1
+    networks:
+      test_net1:
+        ipv4_address: 172.28.1.34
+    environment:
+      - IGN_PARTITION=anothersim
+      - IGN_IP=172.28.1.34
+    depends_on:
+      - "sim"
+
+  extra_messages16:
+    image: advertisetopics
+    command: advertisetopics 125 1
+    networks:
+      test_net1:
+        ipv4_address: 172.28.1.35
+    environment:
+      - IGN_PARTITION=anothersim
+      - IGN_IP=172.28.1.35
+    depends_on:
+      - "sim"
+
+  extra_messages17:
+    image: advertisetopics
+    command: advertisetopics 125 1
+    networks:
+      test_net1:
+        ipv4_address: 172.28.1.36
+    environment:
+      - IGN_PARTITION=anothersim
+      - IGN_IP=172.28.1.36
+    depends_on:
+      - "sim"
+
+  extra_messages18:
+    image: advertisetopics
+    command: advertisetopics 125 1
+    networks:
+      test_net1:
+        ipv4_address: 172.28.1.37
+    environment:
+      - IGN_PARTITION=anothersim
+      - IGN_IP=172.28.1.37
+    depends_on:
+      - "sim"
+
+  extra_messages19:
+    image: advertisetopics
+    command: advertisetopics 125 1
+    networks:
+      test_net1:
+        ipv4_address: 172.28.1.38
+    environment:
+      - IGN_PARTITION=anothersim
+      - IGN_IP=172.28.1.38
+    depends_on:
+      - "sim"
+
+  extra_messages20:
+    image: advertisetopics
+    command: advertisetopics 125 1
+    networks:
+      test_net1:
+        ipv4_address: 172.28.1.39
+    environment:
+      - IGN_PARTITION=anothersim
+      - IGN_IP=172.28.1.39
+    depends_on:
+      - "sim"
+
+  bridge1:
+    image: ${bridgeImage}
+    command: circuit:=${circuit} worldName:=${worldName} robotName1:=${robotName1} robotConfig1:=${robotConfig1}
+    networks:
+      relay_net1:
+        ipv4_address: 172.30.1.1
+      test_net1:
+        ipv4_address: 172.28.1.4
+    environment:
+      - IGN_PARTITION=sim
+      - IGN_IP=172.28.1.4
+      - ROS_MASTER_URI=http://172.30.1.1:11311
+    depends_on:
+      - "sim"
+      - "extra_messages1"
+      - "extra_messages2"
+      - "extra_messages3"
+      - "extra_messages4"
+      - "extra_messages5"
+      - "extra_messages6"
+      - "extra_messages7"
+      - "extra_messages8"
+      - "extra_messages9"
+      - "extra_messages10"
+      - "extra_messages11"
+      - "extra_messages12"
+      - "extra_messages13"
+      - "extra_messages14"
+      - "extra_messages15"
+      - "extra_messages16"
+      - "extra_messages17"
+      - "extra_messages18"
+      - "extra_messages19"
+      - "extra_messages20"
+
+  solution1:
+    image: ${solutionImage}
+    networks:
+      relay_net1:
+        ipv4_address: 172.30.1.2
+    environment:
+      - ROS_MASTER_URI=http://172.30.1.1:11311
+    runtime: nvidia
+    depends_on:
+      - "bridge1"
+
+networks:
+  test_net1:
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.28.1.0/24
+  relay_net1:
+    internal: true
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.30.0.0/16
